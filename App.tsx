@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 import {Dimensions} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -28,6 +18,9 @@ import InputHeader from './src/components/InputHeader';
 import ProfileHeader from './src/components/ProfileHeader';
 import ChatHeader from './src/components/ChatHeader';
 
+import PostHeaderRight from './src/components/PostHeader/HeaderRight';
+import PostHeaderLeft from './src/components/PostHeader/HeaderLeft';
+
 const Stack = createStackNavigator();
 const TabNavigator = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -36,17 +29,32 @@ const StackNagivation = (props) => {
   return (
     <>
       <Stack.Navigator
+        mode="modal"
         initialRouteName="Home"
         screenOptions={{
-          headerTitle: () => <InputHeader />,
-          headerLeft: () => <ProfileHeader {...props} />,
-          headerRight: () => <ChatHeader />,
           headerStyle: {
             height: 105,
             backgroundColor: '#0073b1',
           },
         }}>
-        <Stack.Screen name="Home" component={BottomNavigator} />
+        <Stack.Screen
+          name="Home"
+          component={BottomNavigator}
+          options={{
+            headerTitle: () => <InputHeader />,
+            headerLeft: () => <ProfileHeader {...props} />,
+            headerRight: () => <ChatHeader />,
+          }}
+        />
+        <Stack.Screen
+          name="NewPost"
+          component={Post}
+          options={({navigation}) => ({
+            headerTitle: null,
+            headerLeft: () => <PostHeaderLeft {...navigation} />,
+            headerRight: () => <PostHeaderRight />,
+          })}
+        />
       </Stack.Navigator>
     </>
   );
@@ -95,7 +103,16 @@ const BottomNavigator = () => {
         }}>
         <TabNavigator.Screen name="Home" component={Home} />
         <TabNavigator.Screen name="MyNetwork" component={MyNetwork} />
-        <TabNavigator.Screen name="Post" component={Post} />
+        <TabNavigator.Screen
+          name="Post"
+          component={Post}
+          listeners={({navigation}) => ({
+            tabPress: (e) => {
+              e.preventDefault();
+              navigation.navigate('NewPost');
+            },
+          })}
+        />
         <TabNavigator.Screen name="Notifications" component={Notifications} />
         <TabNavigator.Screen name="Jobs" component={Jobs} />
       </TabNavigator.Navigator>

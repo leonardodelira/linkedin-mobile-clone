@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
   header: {
     height: 50,
     justifyContent: 'center',
-    paddingTop: 20,
     paddingLeft: 15,
+    backgroundColor: '#FFF',
   },
   headerText: {
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: '300',
   },
   image: {
     width: 60,
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 15,
     paddingRight: 0,
+    backgroundColor: '#FFF',
   },
   description: {
     flex: 1,
