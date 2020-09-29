@@ -3,6 +3,7 @@
 ## Tecnologias Utilizadas:
   - React Native
   - StyleSheet
+  - TypeScript
 
 ## Resultado Final
 
