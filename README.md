@@ -1,5 +1,7 @@
 # Linkedin Ui Clone
   
+## Projeto desenvolvido apenas como caso de estudo.
+  
 ## Tecnologias Utilizadas:
   - React Native
   - StyleSheet
